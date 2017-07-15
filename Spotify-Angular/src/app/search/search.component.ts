@@ -9,22 +9,22 @@ import { SpotifyService } from '../services/spotify.service';
 export class SearchComponent implements OnInit {
 
   query: string;
+  type: string;
 
   constructor(private _spotifyService: SpotifyService) { }
 
   ngOnInit() {
   }
 
+  searchType() {
+    console.log(this.type);
+  }
+
   searchTrack() {
-    this._spotifyService.searchTrack(this.query).subscribe( (res) => {
+    this._spotifyService.searchTrack(this.query, this.type).subscribe( (res) => {
+      this._spotifyService.searchResults = res.tracks.items;
       console.log(res.tracks.items);
     });
   }
-
-  // getAuthorization() {
-  //   this._spotifyService.getAuthorization().subscribe( (res) => {
-  //     console.log(res);
-  //   });
-  // }
 
 }

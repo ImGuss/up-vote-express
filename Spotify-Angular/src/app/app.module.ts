@@ -14,6 +14,9 @@ import { ArtistComponent } from './artist/artist.component';
 import { SearchComponent } from './search/search.component';
 import { TrackComponent } from './track/track.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { TrackListComponent } from './track-list/track-list.component';
+import { AlbumListComponent } from './album-list/album-list.component';
+import { ArtistListComponent } from './artist-list/artist-list.component';
 
 
 @NgModule({
@@ -22,8 +25,11 @@ import { SearchResultsComponent } from './search-results/search-results.componen
     AlbumComponent,
     ArtistComponent,
     SearchComponent,
+    SearchResultsComponent,
     TrackComponent,
-    SearchResultsComponent
+    TrackListComponent,
+    AlbumListComponent,
+    ArtistListComponent
   ],
   imports: [
     BrowserModule,
