@@ -22,6 +22,8 @@ export class SpotifyService {
   private data: Object;
   private accessToken: string;
 
+  public searchResults: Object[];
+
   getAuthorization() {
 
     const headers: Headers = new Headers();
@@ -59,12 +61,13 @@ export class SpotifyService {
     // return this._http.get(authUrl).map( res => res.json);
   }
 
-  searchTrack(query: string) {
+  searchTrack(query: string, type: string) {
+    console.log('TYPE~~~~~~','\n',type);
 
     let headers = new Headers({Authorization: 'blah'});
     let options = new RequestOptions({ headers: headers });
 
-    let params: string = [`query=${query}`, `type=track`, `offset=0`, `limit=20`, `market=US`, `access_token=${this.accessToken}`].join('&');
+    let params: string = [`query=${query}`, `type=${type}`, `offset=0`, `limit=20`, `market=US`, `access_token=${this.accessToken}`].join('&');
     console.log(params);
 
     let queryUrl: string = `https://api.spotify.com/v1/search?${params}`;
