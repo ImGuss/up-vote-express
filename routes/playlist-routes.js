@@ -88,8 +88,20 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
   );
 });
 
-playlistRoute.post('/playlists/search', (req, res, next) => {
+playlistRoute.get('/:id/getpin', (req, res, next) => {
 
+  const owner = req.params.id;
+
+  Playlist.findOne(
+    { owner: owner },
+    (err, playlist) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).json(playlist);
+    }
+  );
 });
 
 
