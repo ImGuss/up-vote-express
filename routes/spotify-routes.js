@@ -101,7 +101,6 @@ spotifyRoute.post('/spotify/search', (req, res, next) => {
   };
 
   request.get(options, (err, response, body) => {
-    console.log('\n','OPTIONS!!!~~~',options.url);
     const info = JSON.parse(body);
     res.status(200).json(info);
   });
