@@ -8,9 +8,6 @@ const userSchema = new Schema(
     username: { type: String },
     password: { type: String },
 
-    facebookID: { type: String },
-    spotifyID: { type: String },
-
     accessToken: { type: String },
     refreshToken: { type: String },
   },
