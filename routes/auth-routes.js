@@ -8,8 +8,8 @@ const ensureLoggedIn = require('../lib/ensure-logged-in');
 
 const authRoute = express.Router();
 
-const failureUrl = 'http://localhost:4200/callback';
-const successUrl = 'http://localhost:4200';
+const failureUrl = process.env.FAILURE_URL;
+const successUrl = process.env.SUCCESS_URL;
 
 
 authRoute.get('/auth/spotify',
