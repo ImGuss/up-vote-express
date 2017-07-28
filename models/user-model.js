@@ -10,6 +10,8 @@ const userSchema = new Schema(
 
     accessToken: { type: String },
     refreshToken: { type: String },
+
+    spotifyID: { type: String },
   },
   {
     timestamps: true
