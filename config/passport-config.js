@@ -105,8 +105,6 @@ passport.use(new SpotifyStrategy(
               refreshToken: refreshToken
             },
             (err, theUser) => {
-              console.log(user._id);
-              console.log('\n','\n','THE USER~~~~~',theUser);
               if (err) {
                 next(err);
                 return;
