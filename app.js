@@ -78,6 +78,11 @@ app.use(playlistRoutes);
 // ----------------------------------------
 // END ROUTES
 
+// Display the Angular app if no route matches
+app.use((req, res, next) => {
+    res.sendFile(__dirname + '/public/index.html');
+});
+
 
 
 
@@ -98,7 +103,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.status(400).json({ message: 'Error: Something went wrong' });
 });
 // ----------------------------------------
 // END ERRORS

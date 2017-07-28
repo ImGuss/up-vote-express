@@ -6,7 +6,7 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 
 const User = require('../models/user-model');
 
-const baseUrl = 'http://localhost:3000'
+const baseUrl = process.env.BASE_URL;
 
 // what to save in the session
 passport.serializeUser( (user, cb) => {
