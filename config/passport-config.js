@@ -6,6 +6,8 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 
 const User = require('../models/user-model');
 
+const baseUrl = 'http://localhost:3000'
+
 // what to save in the session
 passport.serializeUser( (user, cb) => {
   cb(null, user);
@@ -65,7 +67,7 @@ passport.use(new SpotifyStrategy(
   {
     clientID: process.env.SPOTIFY_APP_ID,
     clientSecret: process.env.SPOTIFY_APP_SECRET,
-    callbackURL: 'http://localhost:3000/auth/spotify/callback'
+    callbackURL: `${baseUrl}/auth/spotify/callback`
   },
   (accessToken, refreshToken, profile, done) => {
     User.find(
