@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const playlistSchema = new Schema(
   {
-    owner: { type: Number },
+    owner: { type: String },
     pin: { type: Number },
     playlistId: { type: Number }
   },
