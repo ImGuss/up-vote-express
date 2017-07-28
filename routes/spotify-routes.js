@@ -10,8 +10,8 @@ const spotifyRoute = express.Router();
 const client_id = process.env.SPOTIFY_APP_ID;
 const client_secret = process.env.SPOTIFY_APP_SECRET;
 
-const failureUrl = 'http://localhost:4200/callback';
-const successUrl = 'http://localhost:4200';
+const failureUrl = process.env.FAILURE_URL;
+const successUrl = process.env.SUCCESS_URL;
 
 
 const baseUrl = 'https://api.spotify.com/v1/users/';
