@@ -106,5 +106,34 @@ spotifyRoute.post('/spotify/search', (req, res, next) => {
   });
 });
 
+spotifyRoute.post('/spotify/playlist/:userId/add/:playlistId', (req, res, next) => {
+
+  const accessToken = req.body.accessToken;
+
+  const userId = req.params.userId;
+  const playlistId = req.params.playlistId;
+
+  const track = `uris=spotify:track:${req.body.track}`;
+
+  const position = 'position=0';
+
+  const options = {
+    url: `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks?${track}&${position}`,
+    dataType: 'json',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  request.post(options, (err, response, body) => {
+    console.log('RETURNNNN BODY', body);
+    console.log('access token', accessToken);
+    const info = JSON.parse(body);
+    res.status(200).json(info);
+  });
+
+});
+
 
 module.exports = spotifyRoute;
