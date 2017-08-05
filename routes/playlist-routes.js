@@ -74,7 +74,6 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
                 playlistId: body.id
               }
             );
-            console.log(req.user._id);
 
             newPlaylist.save( (err) => {
               if (err) {
