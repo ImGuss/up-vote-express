@@ -45,16 +45,16 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
             return;
           }
 
-          // if no playlist is found, sent post to spotify api
+          // if no playlist is found, send post to spotify api
           // to create one.
 
           const options = {
             url: `${baseUrl}${spotifyId}/playlists`,
             body: JSON.stringify({
-              'name': req.body.listName,
+              'name': 'My UpVote Playlist',
               'public': true,
               'collaborative': false,
-              'description': req.body.listDesc
+              'description': 'Give your pin # to your friends so they can start adding music!'
             }),
             dataType: 'json',
             headers: {
@@ -69,10 +69,12 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
             const newPlaylist = new Playlist(
               {
                 pin: randomNum,
+                ownerId: req.user._id,
                 owner: spotifyId,
                 playlistId: body.id
               }
             );
+            console.log(req.user._id);
 
             newPlaylist.save( (err) => {
               if (err) {
@@ -129,6 +131,24 @@ playlistRoute.post('/pin/search', (req, res, next) => {
           'Content-Type': 'application/json',
         }
       };
+    }
+  );
+});
+
+playlistRoute.get('search/playlists/public', (req, res, next) => {
+
+  const pin = req.body.pin;
+
+  // search database for pin number
+  Playlist.findOne(
+    { pin: pin },
+    (err, playlist) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.status(200).json(playlist);
     }
   );
 });
