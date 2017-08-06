@@ -105,52 +105,25 @@ playlistRoute.get('/:id/getpin', (req, res, next) => {
   );
 });
 
-playlistRoute.post('/pin/search', (req, res, next) => {
-
-  const pin = req.body.pinNumber;
-  Playlist.findOne(
-    { pin: pin },
-    (err, playlist) => {
-      if (err) {
-        next(err);
-        return;
-      }
-
-      const options = {
-        url: `${baseUrl}${spotifyId}/playlists`,
-        body: JSON.stringify({
-          'name': req.body.listName,
-          'public': true,
-          'collaborative': false,
-          'description': req.body.listDesc
-        }),
-        dataType: 'json',
-        headers: {
-          'Authorization': `Bearer ${req.body.accessToken}`,
-          'Content-Type': 'application/json',
-        }
-      };
-    }
-  );
-});
-
-playlistRoute.get('search/playlists/public', (req, res, next) => {
+playlistRoute.post('/search/playlists/public', (req, res, next) => {
 
   const pin = req.body.pin;
 
   // search database for pin number
-  Playlist.findOne(
-    { pin: pin },
-    (err, playlist) => {
+  Playlist
+    .findOne( { pin: pin } )
+    .populate('ownerId')
+    .exec( (err, playlist) => {
       if (err) {
         next(err);
         return;
       }
-
       res.status(200).json(playlist);
     }
   );
 });
+
+
 
 
 module.exports = playlistRoute;
