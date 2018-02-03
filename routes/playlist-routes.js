@@ -41,7 +41,7 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
 
           // if playlist is found, pin is already used. let user know to try one more time
           if (playlist) {
-            res.status(500).json({ message: 'An error occurred when generating a pin. Please try again' });
+            res.status(500).json({ message: 'An error occurred when generating a pin. Please try again.' });
             return;
           }
 
