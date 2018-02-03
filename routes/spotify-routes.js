@@ -118,7 +118,8 @@ spotifyRoute.post('/spotify/playlist/:userId/add/:playlistId', (req, res, next) 
   const position = 'position=0';
 
   const options = {
-    url: `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks?${track}&${position}`,
+    // add &${position} to the end of the string to add the position
+    url: `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks?${track}`,
     dataType: 'json',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
