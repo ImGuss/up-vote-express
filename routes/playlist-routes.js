@@ -89,6 +89,28 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
   );
 });
 
+playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
+
+  console.log('~~~~IN CREDENTIALS SET');
+
+  Playlist.findOneAndUpdate(
+    // find the playlist by the owner
+    { owner: req.body.spotifyId },
+    // update the access from the body sent by angular, taken directly from owner
+    {
+      accessToken: req.body.accessToken,
+      // refreshToken: req.body.refreshToken
+    },
+    (err, playlist) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).json(playlist);
+    }
+  );
+});
+
 playlistRoute.get('/:id/getpin', (req, res, next) => {
 
   const owner = req.params.id;
@@ -122,6 +144,7 @@ playlistRoute.post('/search/playlists/public', (req, res, next) => {
     }
   );
 });
+
 
 
 

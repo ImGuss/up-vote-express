@@ -7,7 +7,10 @@ const playlistSchema = new Schema(
     owner: { type: String },
     ownerId: { type: Schema.Types.ObjectId, ref: 'User' },
     pin: { type: Number },
-    playlistId: { type: Number }
+    playlistId: { type: Number },
+    
+    accessToken: { type: String },
+    refreshToken: { type: String }
   },
   {
     timestamps: true
