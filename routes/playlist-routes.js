@@ -89,6 +89,11 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
   );
 });
 
+// playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
+//   console.log('~~~~~~~IN CREDENTIALS SET');
+//   res.status(200);
+// });
+
 playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
 
   console.log('~~~~IN CREDENTIALS SET');
