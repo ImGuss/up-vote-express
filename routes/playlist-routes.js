@@ -96,8 +96,6 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
 
 playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
 
-  console.log('~~~~IN CREDENTIALS SET');
-
   Playlist.findOneAndUpdate(
     // find the playlist by the owner
     { owner: req.body.spotifyId },
@@ -106,6 +104,19 @@ playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
       accessToken: req.body.accessToken,
       // refreshToken: req.body.refreshToken
     },
+    (err, playlist) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).json(playlist);
+    }
+  );
+});
+
+playlistRoute.post('playlist/credentials/get', (req, res, next) => {
+  Playlist.findOne(
+    { owner: req.body.spotifyId },
     (err, playlist) => {
       if (err) {
         next(err);
