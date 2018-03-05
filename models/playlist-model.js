@@ -7,8 +7,8 @@ const playlistSchema = new Schema(
     owner: { type: String },
     ownerId: { type: Schema.Types.ObjectId, ref: 'User' },
     pin: { type: Number },
-    playlistId: { type: Number },
-    
+    playlistId: { type: String },
+
     accessToken: { type: String },
     refreshToken: { type: String }
   },
