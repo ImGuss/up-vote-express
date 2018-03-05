@@ -64,6 +64,8 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
           };
 
           request.post(options, (err, response, body) => {
+            // parse stringified json
+            const parsedBody = JSON.parse(body);
 
             // save the pin, owner, and the playlistId to a new Playlist instance.
             const newPlaylist = new Playlist(
@@ -71,7 +73,7 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
                 pin: randomNum,
                 ownerId: req.user._id,
                 owner: spotifyId,
-                playlistId: body.id
+                playlistId: parsedBody.id
               }
             );
 
@@ -89,17 +91,13 @@ playlistRoute.post('/playlist/create/:id', (req, res, next) => {
   );
 });
 
-// playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
-//   console.log('~~~~~~~IN CREDENTIALS SET');
-//   res.status(200);
-// });
 
 playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
 
   Playlist.findOneAndUpdate(
     // find the playlist by the owner
     { owner: req.body.spotifyId },
-    // update the access from the body sent by angular, taken directly from owner
+    // update the accessToken from the body sent by angular, taken directly from owner
     {
       accessToken: req.body.accessToken,
       // refreshToken: req.body.refreshToken
@@ -114,7 +112,7 @@ playlistRoute.post('/playlist/credentials/set', (req, res, next) => {
   );
 });
 
-playlistRoute.post('playlist/credentials/get', (req, res, next) => {
+playlistRoute.post('/playlist/credentials/get', (req, res, next) => {
   Playlist.findOne(
     { owner: req.body.spotifyId },
     (err, playlist) => {
